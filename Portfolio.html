@@ -1,0 +1,488 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sulaim — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #12181C;
+    --panel: #182027;
+    --paper: #EDEFE9;
+    --paper-ink: #171B18;
+    --ink: #E9E6DC;
+    --ink-dim: #A9AEA9;
+    --amber: #E0A83E;
+    --teal: #4A8C86;
+    --rose: #B4656F;
+    --rule: rgba(233,230,220,0.14);
+    --rule-light: rgba(23,27,24,0.14);
+    --max: 760px;
+  }
+  *{ box-sizing: border; }
+  html{ scroll-behavior: smooth; }
+  body{
+    margin:0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 17px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1,h2,h3{
+    font-family: 'IBM Plex Serif', serif;
+    font-weight: 600;
+    margin: 0 0 0.4em 0;
+    line-height: 1.15;
+  }
+  a{ color: inherit; }
+  a:focus-visible, button:focus-visible{
+    outline: 2px solid var(--amber);
+    outline-offset: 3px;
+  }
+  .wrap{
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+  code, .mono{ font-family: 'IBM Plex Mono', monospace; }
+
+  /* ---------- top nav ---------- */
+  .topnav{
+    position: sticky; top:0; z-index: 10;
+    background: rgba(18,24,28,0.86);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--rule);
+  }
+  .topnav .wrap{
+    display:flex; justify-content: space-between; align-items:left;
+    padding-top: 14px; padding-bottom: 14px;
+  }
+  .topnav .name{ font-family:'IBM Plex Serif', serif; font-size:1rem; }
+  .topnav ul{ list-style:none; display:flex; gap:22px; margin:0; padding:0; font-size:0.92rem; }
+  .topnav a{ text-decoration:none; color: var(--ink-dim); transition: color .15s; }
+  .topnav a:hover{ color: var(--ink); }
+
+  /* ---------- hero ---------- */
+  .hero{
+    position: relative;
+    padding: 92px 0 76px;
+    overflow: hidden;
+  }
+  .hero .wrap{ position: relative; z-index: 2; }
+  .hero-svg{
+    position: absolute;
+    top: -20px; right: -60px;
+    width: 480px; height: 480px;
+    opacity: 0.9;
+    z-index: 1;
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--teal);
+    margin: 0 0 18px 0;
+  }
+  .hero h1{
+    font-size: clamp(2.4rem, 6vw, 3.4rem);
+    max-width: 9ch;
+  }
+  .hero .tagline{
+    font-size: 1.15rem;
+    color: var(--ink-dim);
+    max-width: 42ch;
+    margin: 18px 0 26px 0;
+  }
+  .hero .meta{
+    font-size: 0.95rem;
+    color: var(--ink-dim);
+    max-width: 50ch;
+  }
+  .hero .links{
+    margin-top: 30px;
+    display:flex; gap: 22px; flex-wrap: wrap;
+  }
+  .hero .links a{
+    text-decoration: none;
+    border-bottom: 1px solid var(--amber);
+    padding-bottom: 2px;
+    font-size: 0.95rem;
+  }
+
+  /* ---------- sections ---------- */
+  section{ padding: 64px 0; }
+  section + section{ border-top: 1px solid var(--rule); }
+  .light{ background: var(--paper); color: var(--paper-ink); }
+  .light + section{ border-top: none; }
+  .light .rule-below{ border-color: var(--rule-light); }
+  section h2{
+    font-size: 1.6rem;
+    margin-bottom: 28px;
+  }
+
+  /* about */
+  #about p{ max-width: 62ch; }
+  #about p + p{ margin-top: 1em; }
+
+  /* skills */
+  .skill-row{
+    display:grid;
+    grid-template-columns: 150px 1fr;
+    gap: 18px;
+    padding: 16px 0;
+    border-top: 1px solid var(--rule-light);
+  }
+  .skill-row:first-of-type{ border-top: none; }
+  .skill-cat{ font-size: 0.95rem; color: #5A6058; padding-top: 3px; }
+  .skill-tags{ display:flex; flex-wrap:wrap; gap: 8px; }
+  .tag{
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 0.82rem;
+    padding: 4px 10px;
+    border: 1px solid rgba(23,27,24,0.22);
+    border-radius: 3px;
+    color: var(--paper-ink);
+    white-space: nowrap;
+  }
+
+  /* projects */
+  .project{
+    padding: 26px 0;
+    border-top: 1px solid var(--rule);
+  }
+  .project:first-of-type{ border-top: none; }
+  .project h3{
+    font-size: 1.2rem;
+    display:flex; align-items:baseline; gap: 10px; flex-wrap: wrap;
+  }
+  .project .dot{
+    width: 9px; height: 9px; border-radius: 50%;
+    display:inline-block; flex-shrink:0;
+  }
+  .project p{ color: var(--ink-dim); max-width: 60ch; margin: 8px 0 12px 0; }
+  .project .tags{ display:flex; flex-wrap:wrap; gap:8px; }
+  .project .tags .tag{
+    color: var(--ink);
+    border-color: var(--rule);
+  }
+
+  /* certifications */
+  .cert-list{ list-style:none; margin:0; padding:0; }
+  .cert-list li{
+    display:grid;
+    grid-template-columns: 1fr auto;
+    gap: 10px;
+    padding: 14px 0;
+    border-top: 1px solid var(--rule-light);
+    align-items: baseline;
+  }
+  .cert-list li:first-child{ border-top:none; }
+  .cert-name{ font-size: 1rem; }
+  .cert-issuer{ font-size: 0.85rem; color: #5A6058; }
+  .cert-date{ font-family:'IBM Plex Mono', monospace; font-size: 0.82rem; color: #5A6058; white-space: nowrap; }
+
+  /* contact */
+  #contact h2{ margin-bottom: 14px; }
+  #contact p{ color: var(--ink-dim); max-width: 52ch; margin-bottom: 30px; }
+  .contact-list{ display:flex; flex-direction:column; gap: 14px; }
+  .contact-list a{
+    text-decoration:none;
+    font-size: 1.05rem;
+    display:inline-flex; align-items:baseline; gap: 12px;
+  }
+  .contact-list .k{
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--teal);
+    width: 74px;
+    flex-shrink:0;
+  }
+  .contact-list a:hover .v{ border-color: var(--amber); }
+  .contact-list .v{ border-bottom: 1px solid transparent; transition: border-color .15s; }
+
+  footer{
+    padding: 30px 0 50px;
+    font-size: 0.85rem;
+    color: var(--ink-dim);
+  }
+
+  @media (max-width: 640px){
+    .hero-svg{ display:none; }
+    .skill-row{ grid-template-columns: 1fr; gap: 6px; }
+    .cert-list li{ grid-template-columns: 1fr; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topnav">
+  <div class="wrap">
+    <div class="name"> Mohd.Sulem</div>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#certifications">Certifications</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</div>
+
+<header class="hero">
+  <svg class="hero-svg" id="clusterSvg" viewBox="0 0 480 480" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"></svg>
+  <div class="wrap">
+    <p class="eyebrow">B.Tech(Computer Science and Engineering)</p>
+    <h1>Mohd.Sulem</h1>
+    <p class="tagline">I study computer science and spend most of my time getting datasets to tell the truth — clustering, classifying, and occasionally arguing with a chatbot.</p>
+    <p class="meta">Based in Lucknow, India. Studying at Integral University, focused on machine learning and data science.</p>
+    <div class="links">
+      <a href="#projects">See my work</a>
+      <a href="#contact">Get in touch</a>
+    </div>
+  </div>
+</header>
+
+<section id="about">
+  <div class="wrap">
+    <h2>About</h2>
+    <p>I'm a computer science student at Integral University in Lucknow, working toward a B.Tech I'll finish in 2027, with a keen interest in artificial intelligence, machine learning, and data science. I've built a foundation in Python, SQL, and data analysis through coursework, certifications, and hands-on projects, and I learn best by building — trying new tools and testing them against real problems.</p>
+    <p>Most of what I've built lives at the intersection of data and decisions: clustering job postings to separate the real ones from the fake, tracing how internet access spread across countries over time, and putting together a chatbot that talks plainly about lung cancer awareness. My goal is to start my career as an AI &amp; Machine Learning engineer, contributing to real solutions while I keep learning from people further along than me.</p>
+  </div>
+</section>
+
+<section id="skills" class="light">
+  <div class="wrap">
+    <h2>Skills</h2>
+    <div class="skill-row">
+      <div class="skill-cat">Programming &amp; web</div>
+      <div class="skill-tags">
+        <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span>
+      </div>
+    </div>
+    <div class="skill-row">
+      <div class="skill-cat">Backend &amp; languages</div>
+      <div class="skill-tags">
+        <span class="tag">Python</span>
+      </div>
+    </div>
+    <div class="skill-row">
+      <div class="skill-cat">Data &amp; databases</div>
+      <div class="skill-tags">
+        <span class="tag">SQL</span><span class="tag">MySQL</span>
+      </div>
+    </div>
+    <div class="skill-row">
+      <div class="skill-cat">AI/ML &amp; analytics</div>
+      <div class="skill-tags">
+        <span class="tag">ML fundamentals</span><span class="tag">Data Cleaning</span><span class="tag">EDA</span><span class="tag">Data Visualization</span><span class="tag">Pandas</span><span class="tag">NumPy</span><span class="tag">Pandas</span><span class="tag">Matplotlib</span><span class="tag">Scikit-learn</span>
+      </div>
+    </div>
+    <div class="skill-row">
+      <div class="skill-cat">Tools</div>
+      <div class="skill-tags">
+        <span class="tag">VS Code</span><span class="tag">Jupyter Notebook</span>
+      </div>
+    </div>
+    <div class="skill-row">
+      <div class="skill-cat">Soft skills</div>
+      <div class="skill-tags">
+        <span class="tag">Communication</span><span class="tag">Problem Solving</span><span class="tag">Analytical Thinking</span><span class="tag">Teamwork</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <h2>Projects</h2>
+
+    <div class="project">
+        <h3>
+  <span class="dot" style="background:var(--amber)"></span>
+  <a href="https://github.com/MohdSulem/INTERNSHIP-PROJECT" target="_blank" rel="noopener noreferrer">Detecting and grouping fake job posts across platforms</a>
+</h3>
+      <!-- <h3><span class="dot" style="background:var(--amber)"></span>Detecting and grouping fake job posts across platforms</h3> -->
+      <p>Built an NLP-based clustering system to detect fraudulent job postings using TF-IDF and K-Means, built during an IBM data science internship. Used PCA, word clouds, and platform-wise analysis to uncover fraud patterns and trends.</p>
+      <div class="tags"><span class="tag">Python</span><span class="tag">TF-IDF</span><span class="tag">K-Means</span><span class="tag">PCA</span></div>
+    </div>
+
+    <div class="project">
+      <h3>
+  <span class="dot" style="background:var(--amber)"></span>
+  <a href="https://github.com/MohdSulem/Internet-users" target="_blank" rel="noopener noreferrer">Our World Connected — global internet growth analysis</a>
+</h3>
+      <p>Analysed 30+ years of global internet and population data with Pandas to study internet adoption trends. Merged and cleaned datasets, then calculated and visualized the share of the world's population online over time — identifying 2019 as the year over 50% of the world got connected.</p>
+      <div class="tags"><span class="tag">Python</span><span class="tag">Pandas</span><span class="tag">Data Visualization</span></div>
+    </div>
+
+    <div class="project">
+      <!-- <h3><span class="dot" style="background:var(--rose)"></span>Data Analysis Practicum</h3> -->
+       <h3>
+  <span class="dot" style="background:var(--rose)"></span>
+  <a href="https://github.com/MohdSulem/skeletal" target="_blank" rel="noopener noreferrer">Data Analysis Practicum</a>
+</h3>
+      <p>Cleaned and analysed a dataset using Python and SQL to derive actionable insights, then built visualizations to communicate patterns and support data-driven conclusions.</p>
+      <div class="tags"><span class="tag">Python</span><span class="tag">SQL</span><span class="tag">Data Visualization</span></div>
+    </div>
+
+    <div class="project">
+      <h3><span class="dot" style="background:var(--amber)"></span>Lung cancer awareness chatbot</h3>
+      <p>Currently working on this project.</p>
+      <p>An AI chatbot built to answer questions and spread awareness about lung cancer — early and prevention-focused information delivered in a conversational format.</p>
+      <div class="tags"><span class="tag">Python</span><span class="tag">NLP</span></div>
+    </div>
+
+    <p style="margin-top:8px;"><a href="https://github.com/MohdSulem" style="border-bottom:1px solid var(--amber); text-decoration:none; padding-bottom:2px;">More on GitHub</a></p>
+  </div>
+</section>
+
+<section id="certifications" class="light">
+  <div class="wrap">
+    <h2>Certifications</h2>
+    <ul class="cert-list">
+      <li>
+        <div>
+          <div class="cert-name">Python for Data Science</div>
+          
+          <div class="cert-issuer">IBM / Coursera</div>
+        </div>
+        <div class="cert-date"></div>
+      </li>
+      <li>
+        <div>
+          <!-- <div class="cert-name">Google AI Essentials</div> -->
+           <div class="cert-name">
+  <a href="https://coursera.org/verify/specialization/FTT6ZFVKPENA" target="_blank" rel="noopener noreferrer">Google AI Essentials</a>
+</div>
+          <div class="cert-issuer"> Google Skills/Coursera</div>
+           
+        </div>
+        <div class="cert-date"></div>
+      </li>
+      <li>
+        <div>
+          <!-- <div class="cert-name">Google Prompting EssentiaLS</div> -->
+             <div class="cert-name">
+  <a href="https://coursera.org/verify/specializat
+ion/ULDOKCN5XZKO" target="_blank" rel="noopener noreferrer">Google Prompting EssentiaLs</a>
+</div>
+          <div class="cert-issuer"> Google /Coursera</div>
+        </div>
+        <div class="cert-date"></div>
+      </li>
+        <div>
+          <div class="cert-name">Machine Learning with Python</div>
+          <div class="cert-issuer">IBM / Cognitive Class</div>
+        </div>
+        <div class="cert-date"></div>
+      </li>
+      <li>
+        <div>
+          <div class="cert-name">Data Science Essentials with Python</div>
+          <div class="cert-issuer">Cisco Networking Academy</div>
+        </div>
+        <!-- <div class="cert-date">2026</div> -->
+      </li>
+      <li>
+        <div>
+          <!-- <div class="cert-name">Prompt Design in Vertex AI Skill </div> -->
+           <div class="cert-name">
+  <a href="https://www.credly.com/badges/bbd72ce8-83ec-43a0-a9bb-c9fe064ae65a/public_url" target="_blank" rel="noopener noreferrer">Prompt Design in Vertex AI Skill</a>
+</div>
+          <div class="cert-issuer">Google Coud</div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <h2>Contact</h2>
+    <p>I'm always happy to talk about data, projects, or opportunities. Reach me through any of these.</p>
+    <div class="contact-list">
+      <a href="mailto:sulaimahmad910@gmail.com"><span class="k">Email</span><span class="v">sulaimahmad910@gmail.com</span></a>
+      <a href="tel:+917905217636"><span class="k">Phone</span><span class="v">+91 7905217636</span></a>
+      <a href="https://www.linkedin.com/in/mohd-sulem-91663931a/" target="_blank" rel="noopener"><span class="k">Linkedin</span><span class="v">linkedin.com/in/mohd-sulem-91663931a</span></a>
+      <a href="https://github.com/MohdSulem" target="_blank" rel="noopener"><span class="k">Github</span><span class="v">github.com/MohdSulem</span></a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">Lucknow, India</div>
+</footer>
+
+<script>
+(function(){
+  var svg = document.getElementById('clusterSvg');
+  if(!svg) return;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var colors = ['#E0A83E', '#4A8C86', '#B4656F'];
+  var centroids = [ {x:150, y:150}, {x:330, y:200}, {x:230, y:340} ];
+  var points = [];
+  var n = 27;
+  for(var i=0;i<n;i++){
+    var c = centroids[i % 3];
+    var angle = Math.random() * Math.PI * 2;
+    var r = 30 + Math.random() * 55;
+    var fx = c.x + Math.cos(angle) * r;
+    var fy = c.y + Math.sin(angle) * r;
+    var sx = 60 + Math.random() * 360;
+    var sy = 60 + Math.random() * 360;
+    points.push({sx:sx, sy:sy, fx:fx, fy:fy, color: colors[i % 3]});
+  }
+
+  var ns = 'http://www.w3.org/2000/svg';
+  var circles = points.map(function(p){
+    var el = document.createElementNS(ns, 'circle');
+    el.setAttribute('cx', reduce ? p.fx : p.sx);
+    el.setAttribute('cy', reduce ? p.fy : p.sy);
+    el.setAttribute('r', 5);
+    el.setAttribute('fill', p.color);
+    el.setAttribute('fill-opacity', '0.85');
+    if(!reduce){ el.style.transition = 'cx 1.8s cubic-bezier(.2,.7,.3,1), cy 1.8s cubic-bezier(.2,.7,.3,1)'; }
+    svg.appendChild(el);
+    return el;
+  });
+
+  centroids.forEach(function(c){
+    var ring = document.createElementNS(ns, 'circle');
+    ring.setAttribute('cx', c.x);
+    ring.setAttribute('cy', c.y);
+    ring.setAttribute('r', 14);
+    ring.setAttribute('fill', 'none');
+    ring.setAttribute('stroke', 'rgba(233,230,220,0.35)');
+    ring.setAttribute('stroke-width', '1.2');
+    ring.setAttribute('opacity', '0');
+    if(!reduce){ ring.style.transition = 'opacity 1s ease'; }
+    else { ring.setAttribute('opacity','1'); }
+    svg.appendChild(ring);
+    if(!reduce){
+      setTimeout(function(){ ring.setAttribute('opacity','1'); }, 1900);
+    }
+  });
+
+  if(!reduce){
+    requestAnimationFrame(function(){
+      setTimeout(function(){
+        points.forEach(function(p, i){
+          circles[i].setAttribute('cx', p.fx);
+          circles[i].setAttribute('cy', p.fy);
+        });
+      }, 200);
+    });
+  }
+})();
+</script>
+
+</body>
+</html>
